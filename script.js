@@ -1,9 +1,10 @@
 let players = [];
-let currentMode = '';
+let currentMode = 'black';
 let currentRound = 0;
 let currentPlayerIndex = 0;
 let selectedAnswers = [];
 let currentQuestion = '';
+let availableCards = [];
 
 const questionCards = {
   black: [
@@ -26,22 +27,30 @@ const questionCards = {
     "La frase più stupida da scrivere su un biglietto d’auguri è____",
     "Il peggior modo per chiedere scusa è____",
     "La cosa più strana che potresti trovare sotto il letto è____",
-    "La cosa più imbarazzante da urlare in pubblico è____",
-
-
-  ],
-  teen: [
-    "Il momento più buffo in cui ho riso è _____.",
-    "Una figuraccia epica combinata con _____.",
-    "Se non sai _____, vuol dire che non hai il mindset vincente",
- 
+    "_____ non è tradire",
+    "______ fa venire in mente bei ricordi",
+    "Ti racconto come ho inconctrato tuo padre,tutto è cominciato con ____",
+    "le ho scritto un poema d'amore, il titolo è _____",
+    "_____ rinforza il nostro amore",
+    "_____, era sicuramente il nostro unico punto in comune quando ci siamo conosciuti",
+    "_____ a che punto accade de la bella addormentata?",
+    "ho comprato una mistery box, dentro c'era _____",
+    "Challenge! chi rimane per ultimo vince _____",
+    "prima di addormentarmi ripenso a _____, e mi addormento col sorriso",
+    "il mio più grande sogno da bambino era _____",
+    "____ i Simpson lo avevano previsto",
+    "il bottone rosso nella casa bianca serve per _____",
+    "lo ammetto, adoro _____",
+    "Il segreto per avere successo è ______",
+    "L'unica cosa peggiore di un lunedì mattina è ______",
+    "Ho comprato una nuova casa, ma non mi aspettavo ______ nel giardino.",
 
   ]
 };
 
 const responseCards = {
   black: [
-    "Imitare Hitler in versione hot",
+   "Imitare Hitler in versione hot",
     "Mandare foto nudo a sconosciuti",
     "La fede in Dio",
     "La parola magica per farsi fare un po****o",
@@ -54,11 +63,11 @@ const responseCards = {
     "Iniettare la candeggina in vena per contrastare il covid",
     "Comprare follower su instagram per scroccare cene e alberghi",
     "I capezzoli a forma di cuore",
-    "Produrre metanfetamine in mezzo al deserto",
+    "Produrre metanfetamina in mezzo al deserto",
     "Un fidanzato camorrista",
     "La sorella gemella",
     "Un Pe*e enorme",
-    "I campi di lavoro in cina",
+    "I campi di lavoro cinesi",
     "Una Bella sculacciata",
     "Se**o nei bagli dell'autogrill",
     "Lo scontrino lungo 5 metri",
@@ -66,7 +75,6 @@ const responseCards = {
     "La bolletta della luce di dicembre",
     "7 anni senza se**o",
     "Il ragù della nonna",
-    "Trovare la frequenza radio dei baby-phones del quartiere",
     "Il botox",
     "Il vicino di casa molesto",
     "Il fantasma di zio Giovanni",
@@ -77,7 +85,7 @@ const responseCards = {
     "La guida definitiva al kamasutra",
     "Mandare nudes al gruppo sbagliato",
     "Ubriacarsi fino a sparire",
-    "Il vibratore dimenticato in valigia",
+    "un vibratore rosa",
     "Fumare in bagno a scuola",
     "un org*a gay",
     "Un threesome finito male",
@@ -86,37 +94,103 @@ const responseCards = {
     "Il tatuaggio fatto da ubriaco",
     "il mostro di firenze",
     "flexare la collezione di carte Pokemon",
-    "un rito per evocare Satana",
-    "Bossetti innocente", 
+    "un rito per evocare un demone del XIII secolo",
     "una bella milf",
     "ubriacarsi e svegliarsi in un altro paese",
     "La fila infinita all’ufficio postale",
-    "una mina di prossimità",
+    "una bomba a idrogeno",
     "il piano per conquistare la Polonia",
+    "Zuccherare il caffè con la cocaina",
+    "Le ricadute radioattive di Chernobyl",
+    "fare l'elicottero con il pe*e",
+    "4 ghanesi che ballano EDM con una bara sulle spalle",
+    "Cambiare il pannolino",
+    "Farsi circoncidere",
+    "Gli assegni familiari",
+    "Il sigma mindset",
+    "Fare un figlio in più per ricevere più sussidi statali",
+    "una mano sulla nuca durante il pom***o",
+    "uscire le tette per guarire i malati di Alzheimer",
+    "Luigi Di Maio e Matteo Salvini",
+    "Partire per la Siria",
+    "un po di droga dello stu**o",
+    "quel po' di razzismo che in fondo c'è in ognuno di noi",
+    "la dialettica di Sgarbi",
+    "le spiagge dello sbarco",
+    "fare una doccia ",
+    "il reddito di cittadinanza",
+    "il campo di Auschwitz",
+    "della sabbia nella vag**a",
+    "una grande put***a",
+    "sbattere il pe*e sul tavolo in segno di protesta",
+    "il suo compleanno che si trasforma in un org*a",
+    "lo spe**a che cola sulle palpebre",
+    "sposare a 14 anni un comandante di guerra somalo",
+    "il flato vaginale la prima notte di se**o",
+    "allineare la coca con la carta di credito",
+    "un secondo aborto spontaneo",
+    "un calcio per farla cadere dalle scale",
+    "il giorno del tuo funerale",
+    "l'eroina",
+    "aprire un conto bancario cointestato",
+    "avere un dibattito sul org***o clitorideo",
+    "farsela sbattere in faccia",
+    "la strage di capaci",
+    "tre dita in culo",
+    "rubare i soldi a medici senza frontiera",
+    "dissare la comunità LGBTQ+",
+    "staccare la spina della nonna per ricaricare il cellulare",
+    "fare gli ASMR pippando coca",
+    "un po' di sano body shaming",
+    "Brumotti pestato a sangue dai bangladini",
+    "l'AIDS",
+    "un uomo appeso",
+    "un can*ro all'ultimo stadio",
+    "il piscio in bottiglia",
+    "un anziano con tendenze neo-naziste",
+    "gas nervino",
+    "buttarsi dal palazzo più alto della città",
+    "un completino sexy",
+    "clara di Heidi",
+    "emulare il suicidio su tiktok",
+    "sponsorizzare il gioco d'azzardo ai minorenni",
+    "se**o con nani",
+    "fare un pom***o ad un puffo",
+    "un film po**o in realtà virtuale",
+    "seg***i sulle foto profilo di linkedin",
+    "giocare a Mario Kart IRL con Stephen Hawking",
+    "Michael Jackson che si stringe le mani sa solo per ricreare la pubblicità della Ringo",
+    "una step sister incastrata nella lavatrice",
+    "viaggiare nel passato e fare se**o con la propria madre",
+    "scoprire di essere gay infilandosi un dito nel cu*o",
+    "una golden shower",
+    "vendere organi sul deep web",
+    "uccidire il proprio figlio a badilate",
+    "accorgersi di avere le tendenze necrofile",
+    "gridare la N word",
+    "la vicina a pecorina",
+    "lo scr**o grigliato",
+    "vendere mattoni e spacciarli per iphone di ultima generazione",
+    "chiedere ad un barbone quanto costa il suo outfit",
+    "chiudere tua moglie incinta in balcone in pieno inverno",
+    "lo zio che racconta barzellette razziste",
 
-  ],
-  teen: [
-    "cadere dalle scale davanti a tutti",
-    "ridere senza motivo in pubblico",
-    "cantare sotto la doccia fingendo di essere una popstar",
-    "confondere il nome dei professori",
-    "mandare messaggi sbagliati al gruppo"
+
+
+
   ]
 };
 
-// ----------------- FUNZIONI -----------------
-
-function selectMode(mode) {
-  currentMode = mode;
+// --- Tasto Gioca ---
+document.getElementById('playBtn').addEventListener('click', () => {
+  document.getElementById('playBtn').classList.add('hidden');
   document.getElementById('playerSetup').classList.remove('hidden');
-}
+});
 
+// --- Creazione giocatori ---
 function createPlayerInputs() {
   const numPlayers = parseInt(document.getElementById('numPlayersInput').value);
-  if (isNaN(numPlayers) || numPlayers < 2) {
-    alert("Inserisci almeno 2 giocatori!");
-    return;
-  }
+  if (isNaN(numPlayers) || numPlayers < 2) { alert("Inserisci almeno 2 giocatori!"); return; }
   const inputsDiv = document.getElementById('playerInputs');
   inputsDiv.innerHTML = '';
   for (let i = 0; i < numPlayers; i++) {
@@ -128,88 +202,107 @@ function createPlayerInputs() {
   document.getElementById('startGameBtn').classList.remove('hidden');
 }
 
+// --- Avvio partita ---
 function startGame() {
   const inputElements = document.querySelectorAll('.playerName');
   players = [];
-  inputElements.forEach(inp => {
-    if (inp.value.trim() !== '') players.push(inp.value.trim());
-  });
-  if (players.length < 2) {
-    alert("Inserisci almeno 2 giocatori!");
-    return;
-  }
-  document.getElementById('modeSelection').classList.add('hidden');
+  inputElements.forEach(inp => { if (inp.value.trim() !== '') players.push(inp.value.trim()); });
+  if (players.length < 2) { alert("Inserisci almeno 2 giocatori!"); return; }
+
   currentRound = 0;
+  availableCards = [...responseCards[currentMode]];
+
+  document.getElementById('modeSelection').classList.add('hidden');
   startRoundScreen();
 }
 
+// --- ROUND ---
 function startRoundScreen() {
   document.getElementById('roundScreen').classList.remove('hidden');
+  document.getElementById('summaryScreen').classList.add('hidden');
+
   currentQuestion = questionCards[currentMode][Math.floor(Math.random() * questionCards[currentMode].length)];
+
   document.getElementById('currentQuestion').innerText = currentQuestion;
+  document.getElementById('roundInfo').innerText = `Round ${currentRound + 1} di ${players.length}`;
+  document.getElementById('judgeInfo').innerText = `Giudice: ${players[currentRound % players.length]}`;
 }
 
+// --- TURNI ---
 function startTurn() {
   document.getElementById('roundScreen').classList.add('hidden');
-  currentPlayerIndex = 0;
   selectedAnswers = [];
+  currentPlayerIndex = 0;
+  if (currentPlayerIndex === currentRound % players.length) currentPlayerIndex++;
   showPlayerTurn();
 }
 
 function showPlayerTurn() {
+  if (currentPlayerIndex >= players.length) { showSummary(); return; }
+  const judgeIndex = currentRound % players.length;
+  if (currentPlayerIndex === judgeIndex) currentPlayerIndex++;
+  if (currentPlayerIndex >= players.length) { showSummary(); return; }
+
   document.getElementById('playerTurn').classList.remove('hidden');
   document.getElementById('playerName').innerText = `Turno di: ${players[currentPlayerIndex]}`;
   document.getElementById('seeHandBtn').classList.remove('hidden');
-  document.getElementById('playerCards').classList.add('hidden');
-  document.getElementById('playerCards').innerHTML = '';
+  const cardsDiv = document.getElementById('playerCards');
+  cardsDiv.classList.add('hidden');
+  cardsDiv.innerHTML = '';
 }
 
 function seeHand() {
   const cardsDiv = document.getElementById('playerCards');
   cardsDiv.innerHTML = '';
   const hand = [];
-  for (let i = 0; i < 5; i++) {
-    const card = responseCards[currentMode][Math.floor(Math.random() * responseCards[currentMode].length)];
-    hand.push(card);
+  const tempAvailable = [...availableCards];
+  for (let i = 0; i < 5 && tempAvailable.length > 0; i++) {
+    const index = Math.floor(Math.random() * tempAvailable.length);
+    hand.push(tempAvailable[index]);
+    tempAvailable.splice(index,1);
   }
-
   hand.forEach(card => {
     const btn = document.createElement('button');
     btn.innerText = card;
     btn.onclick = () => selectCard(card);
     cardsDiv.appendChild(btn);
   });
-
   document.getElementById('seeHandBtn').classList.add('hidden');
   cardsDiv.classList.remove('hidden');
 }
 
 function selectCard(card) {
   selectedAnswers.push(card);
+  const idx = availableCards.indexOf(card);
+  if (idx > -1) availableCards.splice(idx,1);
   currentPlayerIndex++;
-  if (currentPlayerIndex >= players.length) {
-    document.getElementById('playerTurn').classList.add('hidden');
-    showSummary();
+  showPlayerTurn();
+}
+
+// --- RESOCONTO ---
+function showSummary() {
+  document.getElementById('playerTurn').classList.add('hidden');
+  document.getElementById('summaryScreen').classList.remove('hidden');
+  document.getElementById('summaryQuestion').innerText = `Domanda: ${currentQuestion}`;
+  const judge = players[currentRound % players.length];
+  document.getElementById('summaryJudgeInfo').innerText = `Giudice: ${judge}`;
+
+  const div = document.getElementById('summaryAnswers');
+  div.innerHTML = '';
+  selectedAnswers.sort(() => Math.random() - 0.5).forEach((ans,i) => {
+    const p = document.createElement('p');
+    p.innerText = `${i+1}) ${ans}`;
+    div.appendChild(p);
+  });
+
+  if(currentRound+1<players.length){
+    document.getElementById('nextRoundBtn').classList.remove('hidden');
+    document.getElementById('newGameBtn').classList.add('hidden');
   } else {
-    showPlayerTurn();
+    document.getElementById('nextRoundBtn').classList.add('hidden');
+    document.getElementById('newGameBtn').classList.remove('hidden');
   }
 }
 
-function showSummary() {
-  document.getElementById('summaryScreen').classList.remove('hidden');
-  document.getElementById('summaryQuestion').innerText = `Domanda: ${currentQuestion}`;
-
-  // Mescola solo le carte scelte
-  const shuffled = selectedAnswers.sort(() => Math.random() - 0.5);
-  const div = document.getElementById('summaryAnswers');
-  div.innerHTML = '';
-  shuffled.forEach((ans, i) => {
-    const p = document.createElement('p');
-    p.innerText = `Risposta ${i + 1}: ${ans}`;
-    div.appendChild(p);
-  });
-}
-
-function restartGame() {
-  location.reload();
-}
+function nextRound() { currentRound++; startRoundScreen(); }
+function restartGame() { location.reload(); }
