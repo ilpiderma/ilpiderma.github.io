@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CooloPappo Games</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- SCHERMATA INIZIALE -->
+  <div id="modeSelection">
+    <h1>CooloPappo Games</h1>
+    <h2>Scegli la modalità</h2>
+    <button onclick="selectMode('black')">Black / Adult</button>
+    <button onclick="selectMode('teen')">Teen / Soft</button>
+
+    <div id="playerSetup" class="hidden">
+      <h2>Numero di giocatori</h2>
+      <input type="number" id="numPlayersInput" placeholder="Inserisci numero di giocatori" min="2" max="20">
+      <button onclick="createPlayerInputs()">Conferma</button>
+      <div id="playerInputs"></div>
+      <button id="startGameBtn" class="hidden" onclick="startGame()">Avvia Partita</button>
+    </div>
+  </div>
+
+  <!-- SCHERMATA ROUND -->
+  <div id="roundScreen" class="hidden">
+    <h2 id="currentQuestion"></h2>
+    <button onclick="startTurn()">Inizia giro giocatori</button>
+  </div>
+
+  <!-- TURNO GIOCATORE -->
+  <div id="playerTurn" class="hidden">
+    <h2 id="playerName"></h2>
+    <button id="seeHandBtn" onclick="seeHand()">Vedi mano</button>
+    <div id="playerCards" class="hidden"></div>
+  </div>
+
+  <!-- RESOCONTO FINALE -->
+  <div id="summaryScreen" class="hidden">
+    <h2 id="summaryQuestion"></h2>
+    <div id="summaryAnswers"></div>
+    <button onclick="restartGame()">Nuova Partita</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
