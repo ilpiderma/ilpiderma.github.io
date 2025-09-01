@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #8b1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  h1, h2 {
+    font-size: 2em;
+    margin: 15px 0;
+  }
+  
+  button {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 1.3em;
+    cursor: pointer;
+    border-radius: 12px;
+    border: none;
+    background-color: #FFD700;
+    color: #000;
+    width: 80%;
+    max-width: 300px;
+  }
+  
+  input.playerName, input#numPlayersInput {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1em;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #playerCards button {
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 300px;
+    font-size: 1.1em;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+  }
+  
