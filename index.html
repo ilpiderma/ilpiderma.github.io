@@ -10,9 +10,7 @@
   <!-- SCHERMATA INIZIALE -->
   <div id="modeSelection">
     <h1>CooloPappo Games</h1>
-    <h2>Scegli la modalità</h2>
-    <button onclick="selectMode('black')">Black / Adult</button>
-    <button onclick="selectMode('teen')">Teen / Soft</button>
+    <button id="playBtn">Gioca</button>
 
     <div id="playerSetup" class="hidden">
       <h2>Numero di giocatori</h2>
@@ -26,21 +24,27 @@
   <!-- SCHERMATA ROUND -->
   <div id="roundScreen" class="hidden">
     <h2 id="currentQuestion"></h2>
+    <h3 id="roundInfo"></h3>
+    <h3 id="judgeInfo"></h3>
     <button onclick="startTurn()">Inizia giro giocatori</button>
   </div>
 
   <!-- TURNO GIOCATORE -->
   <div id="playerTurn" class="hidden">
-    <h2 id="playerName"></h2>
-    <button id="seeHandBtn" onclick="seeHand()">Vedi mano</button>
-    <div id="playerCards" class="hidden"></div>
+    <div class="centered">
+      <h2 id="playerName"></h2>
+      <button id="seeHandBtn" onclick="seeHand()">Vedi mano</button>
+      <div id="playerCards" class="hidden"></div>
+    </div>
   </div>
 
-  <!-- RESOCONTO FINALE -->
+  <!-- RESOCONTO FINALE ROUND -->
   <div id="summaryScreen" class="hidden">
     <h2 id="summaryQuestion"></h2>
+    <h3 id="summaryJudgeInfo"></h3>
     <div id="summaryAnswers"></div>
-    <button onclick="restartGame()">Nuova Partita</button>
+    <button id="nextRoundBtn" onclick="nextRound()">Prossimo Round</button>
+    <button id="newGameBtn" class="hidden" onclick="restartGame()">Nuova Partita</button>
   </div>
 
   <script src="script.js"></script>
